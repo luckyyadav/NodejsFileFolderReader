@@ -64,6 +64,41 @@ rl.on("line", (line) => {
 });
 
 
+// ################## Desired Answer First Paragraph Language Check ######################
+
+
+/* 
+let desiredAnswerLanguageCheckIntro = false;
+let desiredAnswerLanguageCheckIntroBlock = "";
+let desiredAnswerLanguageCheckIntroSections = [];
+rl.on("line", (line) => {
+  if (line.includes("Desired Answer Start")) {
+    desiredAnswerLanguageCheckIntro = true;     
+    return;
+  }
+
+  if (line.includes("``` ")) {
+    desiredAnswerLanguageCheckIntro = false;
+    HelperFxn.desiredAnswerLanguageCheckIntroValidation(desiredAnswerLanguageCheckIntroSections)
+    rl.close();
+    return;
+  }
+
+  if (desiredAnswerLanguageCheckIntro) { 
+    if (line != "") {
+    //  console.log("\x1b[31m Error: Invalid Desired Answer. Please Check concusion is missing. \x1b[0m");
+      desiredAnswerLanguageCheckIntroBlock+=line;
+      desiredAnswerLanguageCheckIntroSections.push(desiredAnswerLanguageCheckIntroBlock);  
+    }
+  }
+  
+});
+ */
+
+
+ 
+
+
 // ################## Desired Answer Conclusion ######################
 
 
