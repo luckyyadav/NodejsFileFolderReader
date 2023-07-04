@@ -1,0 +1,153 @@
+====================Info Start============================
+
+{
+    "id": "stackoverflow-45699571",
+    "link": "https://stackoverflow.com/questions/45699571"
+}
+
+====================Info End====================================
+
+====================Notes Start============================
+
+The code should be represented in the markdown format.
+
+Example - Explanation with code:
+
+In Python 2.7 and up, there's nicer syntax for this:\n 
+```
+d = {k: v for k, v in d.items() if v > 0}
+```
+After giving example code, Please provide some explanation for the code.
+
+Category	             Definition
+Question Answering	- Involves generating code to perform some coding tasks, this could be "write" , "generate" , "create" style tasks, or any questions related to code, programming
+Debug/Refine/Bugfix	- Find bugs in the code or ask to fix the bugs
+Summarize/Explain	- Explain the given code snippet
+Rewrite/Translate	- Write the code in another languages
+Others	            - If the task is not classified into the above 4 then categorize as Others
+
+
+====================Notes End====================================
+
+====================Title Start====================================
+
+TypeScript string replace with regex, groups and partial string
+
+====================Title End====================================
+
+====================Question Start====================================
+
+I want to use regex to format a number inside an input as I type it.
+
+My problem is: Since I'm using groups to format the number, it only formats when the string matches the regex.
+Here's an example:
+
+The full number is:  12312312312 
+ | Formatted would look like:  123.123.123-12 
+ .  
+If I type  1231231 
+ for example, it doesn't formats to  123.123.1 
+ as I was expecting, only if I type the entire number.
+This is my function: 
+ format(value){
+    // This function returns the formatted string on user input
+    return value.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, "\$1.\$2.\$3-\$4");
+}
+ 
+Is there any way to make the remaining groups optionals?
+
+
+====================Question End====================================
+
+====================Answer Start====================================
+
+You can do it using
+
+
+ function formatStr(str){
+  str = str.replace(/(\d{1,3})(\d{0,3})(\d{0,3})(\d{0,2})/g, function(a, b, c, d, e){
+        let ret = "";
+        if(b != "")
+            ret = b;
+        if(c != "")
+            ret = ret+"." + c;
+        if(d != "")
+            ret = ret+"." + d;
+        if(e != "")
+            ret = ret+"-" + e;
+        return ret;
+  })
+  console.log(str);
+}
+
+formatStr('12312312312');
+formatStr('1231231'); 
+
+
+
+
+====================Answer End====================================
+
+====================Additional Info Start====================================
+
+{
+    "Do you want to reject this annotation": {
+        "options": [
+                "1. Yes",
+                "2. No"
+            ],
+        "answer":"2"
+    },
+    "Available Task categories": {
+        "options":[
+                "1.  Question Answering",
+                "2.  Debug/Refine/Bugfix",
+                "3.  Summarize/Explain",
+                "4.  Rewrite/Translate",
+                "5.  Others",
+                "In the Selected Task category please mention the serial number of the category alone."
+            ],
+        "answer":"2"
+    }
+    
+}
+
+====================Additional Info End====================================
+
+
+====================Desired Question Start====================================
+
+How can a Number be formatted using regex, and is there any way to make the remaining groups optional in TypeScript?`
+
+====================Desired Question End====================================
+
+====================Desired Answer Start====================================
+
+Into format a number using regex, use the replace() method and provide a regular expression pattern as the first argument. Yes, make the remaining groups optional by using the question mark (?) quantifier after each of them. This will make the groups match zero or one occurrence of the preceding element. Here's an updated version of the function that should format the number as user type, even if you don't type the full number at once:
+
+``` TypeScript
+
+format(value){
+    // This function returns the formatted string on user input
+    return value.replace(/(\d{3})(\d{0,3})(\d{0,3})(\d{0,2})/, function(match, p1, p2, p3, p4) {
+      var formatted = p1;
+      if (p2) {
+        formatted += '.' + p2;
+      }
+      if (p3) {
+        formatted += '.' + p3;
+      }
+      if (p4) {
+        formatted += '-' + p4;
+      }
+      return formatted;
+    });
+  }
+  
+````
+
+In this updated function, the second, third, and fourth groups are now optional, with the {0,3} and {0,2} quantifiers allowing them to match zero to three and zero to two occurrences, respectively. Additionally, I've modified the replace() method to use a callback function that dynamically constructs the formatted string based on the matched groups.
+====================Desired Answer End====================================
+
+
+
