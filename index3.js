@@ -64,5 +64,37 @@ rl.on("line", (line) => {
 });
 
 
+// ################## Desired Answer Conclusion ######################
+
+
+
+let desiredAnswerSummary = false;
+let desiredAnswerSummaryBlock = "";
+let desiredAnswerSummarySections = [];
+rl.on("line", (line) => {
+  if (line.includes("``` ")) {
+    desiredAnswerSummary = true;   
+   
+    return;
+  }
+
+  if (line.includes("Desired Answer End")) {
+    desiredAnswerSummary = false;
+    HelperFxn.desiredAnswerConclusionValidation(desiredAnswerSummarySections)
+    rl.close();
+    return;
+  }
+
+  if (desiredAnswerSummary) { 
+    if (line != "") {
+    //  console.log("\x1b[31m Error: Invalid Desired Answer. Please Check concusion is missing. \x1b[0m");
+      desiredAnswerSummaryBlock+=line;
+      desiredAnswerSummarySections.push(desiredAnswerSummaryBlock);  
+    }
+  }
+  
+});
+
+
 
  

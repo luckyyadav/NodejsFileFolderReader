@@ -168,4 +168,20 @@ function desiredAnswerValidation(answer) {
   }
 }
 
-module.exports = { IsLanguageContained, desiredQuestionValidation, desiredAnswerValidation };
+function desiredAnswerConclusionValidation(conslusionAnswer){
+let DesiredAnswerTextConclusion = conslusionAnswer.pop();
+
+
+  let conclusionText = DesiredAnswerTextConclusion.split("```");
+  let concusionLength = conclusionText[conclusionText.length-1].length <= 130;
+  let isConclusionText = !!conclusionText[conclusionText.length-1];
+
+  if(!isConclusionText || concusionLength){
+   
+      console.log("\x1b[31m Error: Invalid Desired Answer. Please Check conclusion text is missing or very less it must be more then 1 line. \x1b[0m");
+    
+  }
+
+}
+
+module.exports = { IsLanguageContained, desiredQuestionValidation, desiredAnswerValidation, desiredAnswerConclusionValidation};
